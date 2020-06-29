@@ -45,24 +45,25 @@ def main():
          
 
     conn = create_connection(database)
-    deletion = input("Do you wish to delete data or enter data? Y/N")
-    if deletion == "n":
-        nid = input("Enter Name of item:\n")
-        tid = input("Enter Type of item:\n")
-        did = input("Enter DoP of item:\n")
-        pid = input("Enter Price of item:\n")
-        if conn is not None:
-            table(conn, tableC)
-            with conn:
-                addInfo(conn,nid,tid,did,pid)
-        else:
-            print("Error with connection to database!")
-    else:
-        deleteK = input("Enter Row id of entry you want to delete.")
-        if conn is not None:
-            table(conn, tableC)
-            with conn:
-                delInfo(conn, deleteK)
-                
+    while True:
+        deletion = input("Do you want to add new entries? Y/N (Type Exit to close)")
+        if deletion == "yes":
+            nid = input("Enter Name of item:\n")
+            tid = input("Enter Type of item:\n")
+            did = input("Enter DoP of item:\n")
+            pid = input("Enter Price of item:\n")
+            if conn is not None:
+                table(conn, tableC)
+                with conn:
+                    addInfo(conn,nid,tid,did,pid)
+            else:
+                print("Error with connection to database!")
+        elif deletion == "no":
+            deleteK = input("Enter Row id of entry you want to delete.")
+            if conn is not None:
+                with conn:
+                    delInfo(conn, deleteK)
+        elif deletion == "Exit":
+            break            
 if __name__ == '__main__':
     main()
