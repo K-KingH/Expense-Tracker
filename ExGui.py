@@ -1,9 +1,14 @@
 import tkinter as tk
-
+from tkinter import messagebox
 window = tk.Tk()
+    
 def func(event):
     if entry1.get() and entry2.get() and entry3.get() and entry4.get() != None:
-        print("Database has been successfully updated.")
+        messagebox.showinfo("Completed","Database has been successfully updated!")
+        entry1.delete(0, tk.END)
+        entry2.delete(0, tk.END)
+        entry3.delete(0, tk.END)
+        entry4.delete(0, tk.END)
     else: 
         print("Missing entry.")
         
